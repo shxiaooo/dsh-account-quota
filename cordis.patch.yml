@@ -1,0 +1,33 @@
+# dsh-account-quota bundle layer.
+# The host reads each configured provider's own API and the browser half shows
+# the result under the composer card. Every figure is upstream-reported: the
+# plan endpoint publishes integer percentages per window, and the balance
+# endpoint publishes prepaid amounts. Neither publishes token counts, and
+# neither publishes spend directly — the day's spend is the sum of the balance
+# drops the host samples, so it is upstream data folded, not estimated.
+#
+# A patch replaces the row's whole `config`, so the profile's own
+# cordis.patch.yml must restate every key it keeps.
+- insert:
+    - id: account-quota
+      name: dsh-account-quota
+      config:
+        requestTimeoutMs: 10000
+        maxResponseBytes: 65536
+        cacheMs: 60000
+        providers:
+          # `settings.yaml` names the OpenCode Go route `opencodego-deepseek`,
+          # whose credential is OPENCODEGO_API_KEY. This adapter reads the same
+          # upstream under the plugin's own id.
+          deepseek-go:
+            kind: plan
+            displayName: OpenCode Go
+            apiKeyEnv: OPENCODEGO_API_KEY
+            usageUrl: https://opencode.ai/zen/go/v1/usage
+            rollingLabel: 5 小时
+          deepseek:
+            kind: tokens
+            displayName: DeepSeek 官方
+            apiKeyEnv: DEEPSEEK_API_KEY
+            balanceUrl: https://api.deepseek.com/user/balance
+            currency: CNY

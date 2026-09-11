@@ -1,0 +1,10 @@
+node_modules/
+pnpm-debug.log*
+*.log
+
+# Runtime state written by the host half ($DSH_HOME/account-quota/state.json).
+# Only ever lives outside the package, listed here in case statePath is pointed
+# at the working tree during development.
+state.json
+
+.DS_Store

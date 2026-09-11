@@ -1,0 +1,63 @@
+{
+  "name": "dsh-account-quota",
+  "version": "0.7.0",
+  "description": "DeepSeek Harness web plugin: an ambient balance/limit reading under the composer, showing upstream-reported DeepSeek balance and OpenCode Go usage, plus a day’s spend folded from the balance deltas the host samples.",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/client.js",
+    "cordis.patch.yml",
+    "README.md",
+    "PATCHES.md",
+    "selftest.js"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shxiaooo/dsh-account-quota.git"
+  },
+  "homepage": "https://github.com/shxiaooo/dsh-account-quota#readme",
+  "bugs": {
+    "url": "https://github.com/shxiaooo/dsh-account-quota/issues"
+  },
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "dsh-plugin",
+    "quota",
+    "balance",
+    "opencode",
+    "deepseek"
+  ],
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/dsh-credentials": "^0.1.0-rc.6",
+    "@deepseek-ai/dsh-host-webserver": "^0.1.0-rc.6",
+    "react": ">=18.0.0"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "react",
+        "@deepseek-ai/dsh-client-ui-layout",
+        "@deepseek-ai/dsh-client-ui-slots"
+      ]
+    }
+  },
+  "scripts": {
+    "test": "node selftest.js"
+  }
+}
